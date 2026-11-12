@@ -8,8 +8,6 @@ import {
   ExternalLink, 
   AlertCircle, 
   CheckCircle2, 
-  Terminal, 
-  Sparkles,
   RefreshCw,
   Server
 } from 'lucide-react';
@@ -93,80 +91,80 @@ export const SupabaseModal: React.FC<SupabaseModalProps> = ({
   return (
     <div
       onClick={onClose}
-      className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 bg-[#2D2D2D]/80 backdrop-blur-sm flex items-center justify-center p-4"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden"
+        className="bg-white border-3 border-[#2D2D2D] rounded-2xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-[12px_12px_0_#2D2D2D] overflow-hidden"
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 bg-slate-950 border-b border-slate-800">
-          <div className="flex items-center space-x-3">
-            <div className="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30">
-              <Database className="w-5 h-5" />
+        <div className="flex items-center justify-between px-6 py-4 bg-[#FFFEF2] border-b-2 border-[#2D2D2D]">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-[#00D37F] border-2 border-[#2D2D2D] shadow-[3px_3px_0_#2D2D2D] flex items-center justify-center">
+              <Database className="w-5 h-5 text-[#2D2D2D]" />
             </div>
             <div>
-              <h3 className="text-sm font-bold text-white flex items-center space-x-2">
-                <span>Supabase Database Integration</span>
-                <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                  Cloud Ready
+              <h3 className="font-hand text-2xl font-bold text-[#2D2D2D] flex items-center gap-2">
+                <span>Supabase Sync</span>
+                <span className="font-code text-[10px] uppercase font-bold px-2 py-0.5 rounded-md bg-[#FFD23F] border border-[#2D2D2D]">
+                  POSTGRES READY
                 </span>
               </h3>
-              <p className="text-xs text-slate-400">
-                Persist scraped Fiverr gigs to your free Supabase PostgreSQL database
+              <p className="label-mono text-[10px] text-[#2D2D2D]/70">
+                Sync scraped records directly to your cloud database
               </p>
             </div>
           </div>
 
           <button
             onClick={onClose}
-            className="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors"
+            className="w-8 h-8 rounded-lg bg-white hover:bg-[#FF6B6B] hover:text-white border-2 border-[#2D2D2D] shadow-[2px_2px_0_#2D2D2D] flex items-center justify-center text-[#2D2D2D] transition-colors"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4 stroke-[2.5]" />
           </button>
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex border-b border-slate-800 bg-slate-950/60 px-6 pt-2">
+        <div className="flex border-b-2 border-[#2D2D2D] bg-[#FFFEF2] px-6 pt-2 gap-2">
           <button
             onClick={() => setActiveTab('sync')}
-            className={`pb-2.5 px-3 text-xs font-semibold border-b-2 transition-all ${
+            className={`pb-2.5 px-3 font-code text-xs font-bold transition-all border-b-3 ${
               activeTab === 'sync'
-                ? 'border-emerald-500 text-emerald-400'
-                : 'border-transparent text-slate-400 hover:text-white'
+                ? 'border-[#2D2D2D] text-[#2D2D2D] -mb-[2px]'
+                : 'border-transparent text-[#2D2D2D]/60 hover:text-[#2D2D2D]'
             }`}
           >
-            Connect & Sync ({gigs.length} Gigs)
+            Sync ({gigs.length} Gigs)
           </button>
           <button
             onClick={() => setActiveTab('schema')}
-            className={`pb-2.5 px-3 text-xs font-semibold border-b-2 transition-all ${
+            className={`pb-2.5 px-3 font-code text-xs font-bold transition-all border-b-3 ${
               activeTab === 'schema'
-                ? 'border-emerald-500 text-emerald-400'
-                : 'border-transparent text-slate-400 hover:text-white'
+                ? 'border-[#2D2D2D] text-[#2D2D2D] -mb-[2px]'
+                : 'border-transparent text-[#2D2D2D]/60 hover:text-[#2D2D2D]'
             }`}
           >
-            SQL Table Schema
+            SQL Schema
           </button>
           <button
             onClick={() => setActiveTab('vercel')}
-            className={`pb-2.5 px-3 text-xs font-semibold border-b-2 transition-all ${
+            className={`pb-2.5 px-3 font-code text-xs font-bold transition-all border-b-3 ${
               activeTab === 'vercel'
-                ? 'border-emerald-500 text-emerald-400'
-                : 'border-transparent text-slate-400 hover:text-white'
+                ? 'border-[#2D2D2D] text-[#2D2D2D] -mb-[2px]'
+                : 'border-transparent text-[#2D2D2D]/60 hover:text-[#2D2D2D]'
             }`}
           >
-            Vercel Deployment
+            Vercel Config
           </button>
         </div>
 
         {/* Body Content */}
-        <div className="p-6 overflow-y-auto space-y-4 text-xs">
+        <div className="p-6 overflow-y-auto space-y-4 text-xs font-sans">
           {activeTab === 'sync' && (
             <div className="space-y-4">
-              <div className="space-y-3 bg-slate-950/60 p-4 rounded-xl border border-slate-800">
+              <div className="space-y-3 bg-[#FFFEF2] p-4 rounded-xl border-2 border-[#2D2D2D] shadow-[3px_3px_0_#2D2D2D]">
                 <div>
-                  <label className="block text-slate-300 font-semibold mb-1">
+                  <label className="label-mono block text-[#2D2D2D] mb-1">
                     Supabase Project URL
                   </label>
                   <input
@@ -174,12 +172,12 @@ export const SupabaseModal: React.FC<SupabaseModalProps> = ({
                     value={config.url}
                     onChange={(e) => setConfig({ ...config, url: e.target.value })}
                     placeholder="https://xyzprojectid.supabase.co"
-                    className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+                    className="w-full px-3 py-2 bg-white border-2 border-[#2D2D2D] rounded-lg text-xs font-bold text-[#2D2D2D] shadow-[2px_2px_0_#2D2D2D] outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-slate-300 font-semibold mb-1">
+                  <label className="label-mono block text-[#2D2D2D] mb-1">
                     Supabase Anon Key (Public Key)
                   </label>
                   <input
@@ -187,12 +185,12 @@ export const SupabaseModal: React.FC<SupabaseModalProps> = ({
                     value={config.anonKey}
                     onChange={(e) => setConfig({ ...config, anonKey: e.target.value })}
                     placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-                    className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+                    className="w-full px-3 py-2 bg-white border-2 border-[#2D2D2D] rounded-lg text-xs font-bold text-[#2D2D2D] shadow-[2px_2px_0_#2D2D2D] outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-slate-300 font-semibold mb-1">
+                  <label className="label-mono block text-[#2D2D2D] mb-1">
                     Target Table Name
                   </label>
                   <input
@@ -200,7 +198,7 @@ export const SupabaseModal: React.FC<SupabaseModalProps> = ({
                     value={config.tableName}
                     onChange={(e) => setConfig({ ...config, tableName: e.target.value })}
                     placeholder="fiverr_gigs"
-                    className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+                    className="w-full px-3 py-2 bg-white border-2 border-[#2D2D2D] rounded-lg text-xs font-bold text-[#2D2D2D] shadow-[2px_2px_0_#2D2D2D] outline-none"
                   />
                 </div>
 
@@ -208,12 +206,12 @@ export const SupabaseModal: React.FC<SupabaseModalProps> = ({
                   <button
                     onClick={handleTestConnection}
                     disabled={isTesting || !config.url || !config.anonKey}
-                    className="flex items-center space-x-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 disabled:opacity-40 text-slate-200 rounded-lg font-semibold transition-colors"
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-[#FFFEF2] text-[#2D2D2D] border-2 border-[#2D2D2D] shadow-[2px_2px_0_#2D2D2D] rounded-lg font-bold text-xs transition-colors"
                   >
                     {isTesting ? (
                       <RefreshCw className="w-3.5 h-3.5 animate-spin" />
                     ) : (
-                      <Server className="w-3.5 h-3.5 text-emerald-400" />
+                      <Server className="w-3.5 h-3.5 text-[#00D37F]" />
                     )}
                     <span>{isTesting ? 'Testing...' : 'Test Connection'}</span>
                   </button>
@@ -222,7 +220,7 @@ export const SupabaseModal: React.FC<SupabaseModalProps> = ({
                     href="https://supabase.com/dashboard"
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center space-x-1 text-slate-400 hover:text-emerald-400 ml-auto transition-colors"
+                    className="flex items-center gap-1 font-code text-xs text-[#2D2D2D] hover:underline ml-auto"
                   >
                     <span>Supabase Dashboard</span>
                     <ExternalLink className="w-3 h-3" />
@@ -230,39 +228,29 @@ export const SupabaseModal: React.FC<SupabaseModalProps> = ({
                 </div>
               </div>
 
-              {/* Test Connection Result Alert */}
+              {/* Alerts */}
               {testResult && (
                 <div
-                  className={`p-3 rounded-xl border flex items-start space-x-2.5 ${
-                    testResult.success
-                      ? 'bg-emerald-950/60 border-emerald-500/40 text-emerald-200'
-                      : 'bg-red-950/60 border-red-500/40 text-red-200'
+                  className={`p-3 rounded-xl border-2 border-[#2D2D2D] shadow-[3px_3px_0_#2D2D2D] flex items-start gap-2.5 ${
+                    testResult.success ? 'bg-[#00D37F]/20 text-[#2D2D2D]' : 'bg-[#FF6B6B]/20 text-[#2D2D2D]'
                   }`}
                 >
                   {testResult.success ? (
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-[#00D37F] shrink-0 mt-0.5 stroke-[3]" />
                   ) : (
-                    <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                    <AlertCircle className="w-4 h-4 text-[#FF6B6B] shrink-0 mt-0.5 stroke-[3]" />
                   )}
-                  <p className="text-xs leading-relaxed">{testResult.message}</p>
+                  <p className="font-code text-xs leading-relaxed">{testResult.message}</p>
                 </div>
               )}
 
-              {/* Sync Result Alert */}
               {syncResult && (
                 <div
-                  className={`p-3 rounded-xl border flex items-start space-x-2.5 ${
-                    syncResult.success
-                      ? 'bg-emerald-950/60 border-emerald-500/40 text-emerald-200'
-                      : 'bg-red-950/60 border-red-500/40 text-red-200'
+                  className={`p-3 rounded-xl border-2 border-[#2D2D2D] shadow-[3px_3px_0_#2D2D2D] flex items-start gap-2.5 ${
+                    syncResult.success ? 'bg-[#00D37F]/20 text-[#2D2D2D]' : 'bg-[#FF6B6B]/20 text-[#2D2D2D]'
                   }`}
                 >
-                  {syncResult.success ? (
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  ) : (
-                    <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
-                  )}
-                  <p className="text-xs leading-relaxed">
+                  <p className="font-code text-xs leading-relaxed">
                     {syncResult.success
                       ? `🎉 Successfully synced ${syncResult.count} gigs into Supabase table '${config.tableName}'!`
                       : `Sync error: ${syncResult.error}`}
@@ -270,83 +258,62 @@ export const SupabaseModal: React.FC<SupabaseModalProps> = ({
                 </div>
               )}
 
-              {/* Action Button */}
-              <div className="pt-2">
-                <button
-                  onClick={handleSyncToSupabase}
-                  disabled={isSyncing || gigs.length === 0 || !config.url || !config.anonKey}
-                  className="w-full flex items-center justify-center space-x-2 py-3 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:pointer-events-none text-white font-bold rounded-xl shadow-lg shadow-emerald-600/20 transition-all active:scale-95"
-                >
-                  {isSyncing ? (
-                    <>
-                      <RefreshCw className="w-4 h-4 animate-spin" />
-                      <span>Syncing Gigs to Supabase...</span>
-                    </>
-                  ) : (
-                    <>
-                      <UploadCloud className="w-4 h-4" />
-                      <span>Push {gigs.length} Scraped Gigs to Supabase</span>
-                    </>
-                  )}
-                </button>
-              </div>
+              <button
+                onClick={handleSyncToSupabase}
+                disabled={isSyncing || gigs.length === 0 || !config.url || !config.anonKey}
+                className="w-full py-3 bg-[#00D37F] hover:bg-[#00ba70] disabled:opacity-40 disabled:pointer-events-none text-[#2D2D2D] font-extrabold uppercase font-sans text-xs tracking-wider border-2 border-[#2D2D2D] shadow-[4px_4px_0_#2D2D2D] active:translate-x-0.5 active:translate-y-0.5 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer"
+              >
+                {isSyncing ? (
+                  <>
+                    <RefreshCw className="w-4 h-4 animate-spin" />
+                    <span>Syncing Gigs to Supabase...</span>
+                  </>
+                ) : (
+                  <>
+                    <UploadCloud className="w-4 h-4" />
+                    <span>Push {gigs.length} Gigs to Supabase Table</span>
+                  </>
+                )}
+              </button>
             </div>
           )}
 
           {activeTab === 'schema' && (
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <p className="text-slate-300">
-                  Run this SQL in your Supabase project's <strong>SQL Editor</strong> to create the table and indexes:
+                <p className="font-code text-xs font-bold text-[#2D2D2D]">
+                  Run this SQL in your Supabase project's SQL Editor:
                 </p>
                 <button
                   onClick={handleCopySchema}
-                  className="flex items-center space-x-1.5 px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold transition-colors"
+                  className="flex items-center gap-1.5 px-3 py-1 bg-white hover:bg-[#FFD23F] text-[#2D2D2D] border-2 border-[#2D2D2D] shadow-[2px_2px_0_#2D2D2D] rounded-lg font-code text-xs font-bold"
                 >
-                  {copiedSchema ? (
-                    <>
-                      <Check className="w-3.5 h-3.5 text-emerald-400" />
-                      <span className="text-emerald-400">Copied!</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-3.5 h-3.5 text-slate-400" />
-                      <span>Copy SQL Schema</span>
-                    </>
-                  )}
+                  {copiedSchema ? <Check className="w-3.5 h-3.5 text-[#00D37F]" /> : <Copy className="w-3.5 h-3.5" />}
+                  <span>{copiedSchema ? 'Copied!' : 'Copy SQL'}</span>
                 </button>
               </div>
 
-              <div className="p-3 bg-slate-950 font-mono text-xs rounded-xl border border-slate-800 max-h-72 overflow-y-auto text-emerald-400/90 leading-relaxed">
+              <div className="p-3 bg-[#FFFEF2] font-code text-xs rounded-xl border-2 border-[#2D2D2D] shadow-[3px_3px_0_#2D2D2D] max-h-72 overflow-y-auto text-[#2D2D2D] leading-relaxed">
                 <pre>{SUPABASE_SQL_SCHEMA}</pre>
               </div>
             </div>
           )}
 
           {activeTab === 'vercel' && (
-            <div className="space-y-4">
-              <div className="bg-slate-950/60 p-4 rounded-xl border border-slate-800 space-y-2">
-                <h4 className="font-bold text-white flex items-center space-x-2">
-                  <span>Deploying to Vercel in 1-Click</span>
-                </h4>
-                <p className="text-slate-400 leading-relaxed">
-                  This project includes <code className="text-emerald-400">vercel.json</code> configured for Vite.
-                  You can deploy it directly via GitHub or Vercel CLI with zero manual configuration.
+            <div className="space-y-4 font-sans text-xs">
+              <div className="bg-[#FFD23F] p-4 rounded-xl border-2 border-[#2D2D2D] shadow-[3px_3px_0_#2D2D2D] space-y-1">
+                <h4 className="font-hand text-2xl font-bold text-[#2D2D2D]">1-Click Vercel Deployment</h4>
+                <p className="font-sans text-xs text-[#2D2D2D] leading-relaxed">
+                  Repository includes configured <code className="bg-white px-1 py-0.5 rounded border border-[#2D2D2D] font-code">vercel.json</code>. Just connect your GitHub repo to Vercel and it deploys automatically!
                 </p>
               </div>
 
-              <div className="space-y-2">
-                <span className="font-semibold text-slate-300">Environment Variables to set in Vercel:</span>
-                <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 font-mono text-[11px] space-y-1 text-slate-300">
+              <div className="bg-[#FFFEF2] p-4 rounded-xl border-2 border-[#2D2D2D] shadow-[3px_3px_0_#2D2D2D] space-y-2">
+                <span className="label-mono block text-[#2D2D2D]">Environment Variables:</span>
+                <div className="font-code text-xs bg-white p-3 rounded-lg border border-[#2D2D2D] space-y-1 text-[#2D2D2D]">
                   <div>VITE_SUPABASE_URL=https://your-project.supabase.co</div>
                   <div>VITE_SUPABASE_ANON_KEY=your-anon-key-here</div>
                 </div>
-              </div>
-
-              <div className="bg-emerald-950/30 border border-emerald-500/30 p-3 rounded-xl text-emerald-300">
-                <p>
-                  <strong>Tip for Non-Coders:</strong> Connect your GitHub repository to Vercel, click <strong>Deploy</strong>, and your live analytics dashboard will be live at a free <code className="text-white">*.vercel.app</code> domain!
-                </p>
               </div>
             </div>
           )}

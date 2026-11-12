@@ -10,7 +10,7 @@ import { SupabaseModal } from './components/SupabaseModal';
 import { CommunityHub } from './components/CommunityHub';
 import { FiverrGig, ScrapeFilters, ScraperStatus } from './types/scraper';
 import { downloadCsvFile } from './utils/csvExporter';
-import { CheckCircle2, AlertCircle, Info, Sparkles, Download } from 'lucide-react';
+import { Download, Sparkles } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'sandbox' | 'table' | 'code' | 'community'>('sandbox');
@@ -78,7 +78,6 @@ export default function App() {
   }, []);
 
   const handleStart = () => {
-    // If starting fresh or re-starting
     if (status === 'completed' || status === 'idle') {
       setScrapedGigs([]);
       setScrapedIds(new Set());
@@ -112,7 +111,6 @@ export default function App() {
     setStatus('idle');
   };
 
-  // Dismiss auto-download toast after 6 seconds
   useEffect(() => {
     if (autoDownloadToast) {
       const timer = setTimeout(() => {
@@ -123,7 +121,7 @@ export default function App() {
   }, [autoDownloadToast]);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-emerald-500 selection:text-slate-950">
+    <div className="min-h-screen bg-[#FFFEF2] text-[#2D2D2D] flex flex-col font-sans selection:bg-[#FFD23F] selection:text-[#2D2D2D]">
       {/* App Header */}
       <Header
         activeTab={activeTab}
@@ -136,26 +134,24 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        {/* Automatic CSV Download Toast */}
+        {/* Automatic Download Toast */}
         {autoDownloadToast && (
-          <div className="fixed top-20 right-5 z-50 bg-emerald-950 border border-emerald-500/80 rounded-2xl p-4 shadow-2xl flex items-center space-x-3 text-emerald-100 max-w-md animate-in slide-in-from-top-4 duration-300">
-            <div className="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/40">
-              <Download className="w-5 h-5 text-emerald-400" />
+          <div className="fixed top-24 right-6 z-50 bg-[#00D37F] border-3 border-[#2D2D2D] rounded-2xl p-4 shadow-[8px_8px_0_#2D2D2D] flex items-center gap-3 text-[#2D2D2D] max-w-md animate-in slide-in-from-top-4 duration-300">
+            <div className="w-10 h-10 rounded-xl bg-[#FFD23F] border-2 border-[#2D2D2D] shadow-[2px_2px_0_#2D2D2D] flex items-center justify-center shrink-0">
+              <Download className="w-5 h-5 text-[#2D2D2D] stroke-[2.5]" />
             </div>
-            <div className="flex-1 text-xs">
-              <div className="font-bold text-white text-sm">
+            <div className="flex-1 text-xs font-sans">
+              <div className="font-hand text-xl font-bold leading-tight">
                 Dataset Exported Automatically!
               </div>
-              <p className="text-emerald-300/80">
+              <p className="font-code text-[11px] text-[#2D2D2D]/90 mt-0.5">
                 Extracted <strong>{autoDownloadToast.count} gigs</strong>. Saved as{' '}
-                <span className="font-mono text-emerald-300 font-semibold underline">
-                  {autoDownloadToast.filename}
-                </span>
+                <span className="underline font-bold">{autoDownloadToast.filename}</span>
               </p>
             </div>
             <button
               onClick={() => setAutoDownloadToast(null)}
-              className="text-emerald-400 hover:text-white p-1 text-xs"
+              className="w-7 h-7 bg-white hover:bg-[#FF6B6B] hover:text-white border-2 border-[#2D2D2D] shadow-[1px_1px_0_#2D2D2D] rounded-lg font-bold flex items-center justify-center text-xs transition-colors"
             >
               ✕
             </button>
@@ -225,6 +221,16 @@ export default function App() {
         onClose={() => setIsSupabaseModalOpen(false)}
         gigs={scrapedGigs}
       />
+
+      {/* Playful Charm Footer */}
+      <footer className="border-t-2 border-[#2D2D2D] bg-white py-3.5 px-6 flex flex-col sm:flex-row justify-between items-center gap-2 label-mono text-[#2D2D2D] mt-auto">
+        <span>[ Status: Connected ]</span>
+        <span>Designed for High Performance Scraping • 2026</span>
+        <div className="flex gap-4">
+          <span>Supabase Sync: ON</span>
+          <span>Build 1.2.0</span>
+        </div>
+      </footer>
     </div>
   );
 }

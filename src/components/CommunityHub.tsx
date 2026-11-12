@@ -6,20 +6,16 @@ import {
   ExternalLink, 
   Sparkles, 
   BookOpen, 
-  Terminal, 
   Lightbulb, 
   Download, 
   Share2, 
   Database, 
   ShieldCheck, 
   CheckCircle2,
-  FileText,
   Rocket,
-  Code2,
-  HelpCircle,
-  TrendingUp,
   Cpu,
-  Zap
+  Zap,
+  TrendingUp
 } from 'lucide-react';
 import { FiverrGig } from '../types/scraper';
 
@@ -28,7 +24,7 @@ interface CommunityHubProps {
 }
 
 export const CommunityHub: React.FC<CommunityHubProps> = ({ gigs }) => {
-  const [activeTab, setActiveTab] = useState<'metadata' | 'nocoder' | 'social' | 'suggestions' | 'files'>('metadata');
+  const [activeTab, setActiveTab] = useState<'metadata' | 'nocoder' | 'social' | 'suggestions'>('metadata');
   const [copiedField, setCopiedField] = useState<string | null>(null);
 
   const copyToClipboard = (text: string, id: string) => {
@@ -40,7 +36,7 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ gigs }) => {
   const REPO_SUGGESTIONS = [
     { name: 'fiverr-gig-scraper-pro', tag: 'Recommended' },
     { name: 'fiverr-scraper-extension', tag: 'Direct & Simple' },
-    { name: 'fiverr-market-intelligence-scraper', tag: 'Enterprise / Analytics' },
+    { name: 'fiverr-market-intelligence-scraper', tag: 'Enterprise Analytics' },
   ];
 
   const REPO_DESCRIPTION =
@@ -61,91 +57,63 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ gigs }) => {
     'typescript',
   ];
 
-  const BADGES_MARKDOWN = `[![Manifest V3](https://img.shields.io/badge/Chrome%20Extension-Manifest%20V3-emerald?style=for-the-badge&logo=google-chrome&logoColor=white)](https://developer.chrome.com/docs/extensions/mv3/intro/)
-[![Supabase Ready](https://img.shields.io/badge/Supabase-Database%20Ready-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com)
-[![Vercel Deploy](https://img.shields.io/badge/Vercel-Deploy%20Ready-black?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](https://github.com)`;
+  const BADGES_MARKDOWN = `[![Manifest V3](https://img.shields.io/badge/Chrome%20Extension-Manifest%20V3-00D37F?style=for-the-badge&logo=google-chrome&logoColor=2D2D2D)](https://developer.chrome.com/docs/extensions/mv3/intro/)
+[![Supabase Ready](https://img.shields.io/badge/Supabase-Database%20Ready-FFD23F?style=for-the-badge&logo=supabase&logoColor=2D2D2D)](https://supabase.com)
+[![Vercel Deploy](https://img.shields.io/badge/Vercel-Deploy%20Ready-2D2D2D?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)`;
 
-  // Generate SVG social preview banner
   const downloadSocialBannerSvg = () => {
     const avgPrice = gigs.length > 0 ? (gigs.reduce((a, b) => a + b.price, 0) / gigs.length).toFixed(1) : '124.5';
-    const totalGigs = gigs.length > 0 ? gigs.length : '150+';
 
     const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
-  <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#090d16"/>
-      <stop offset="50%" stop-color="#0f172a"/>
-      <stop offset="100%" stop-color="#061c16"/>
-    </linearGradient>
-    <linearGradient id="primary" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#10b981"/>
-      <stop offset="100%" stop-color="#14b8a6"/>
-    </linearGradient>
-  </defs>
+  <rect width="1200" height="630" fill="#FFFEF2"/>
+  <rect x="20" y="20" width="1160" height="590" rx="24" fill="#ffffff" stroke="#2D2D2D" stroke-width="4"/>
+  
+  <!-- Offset hard shadow block -->
+  <rect x="100" y="90" width="60" height="60" rx="12" fill="#00D37F" stroke="#2D2D2D" stroke-width="3"/>
+  <text x="130" y="132" font-family="'Gaegu', cursive, sans-serif" font-size="38" font-weight="900" fill="#2D2D2D" text-anchor="middle">fi</text>
 
-  <rect width="1200" height="630" fill="url(#bg)"/>
-
-  <!-- Grid accent dots -->
-  <circle cx="1100" cy="100" r="140" fill="#10b981" opacity="0.08" filter="blur(40px)"/>
-  <circle cx="150" cy="500" r="180" fill="#059669" opacity="0.08" filter="blur(50px)"/>
-
-  <!-- Logo Pill -->
-  <g transform="translate(100, 110)">
-    <rect width="56" height="56" rx="16" fill="url(#primary)"/>
-    <text x="28" y="38" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="900" fill="#ffffff" text-anchor="middle">fi</text>
-    <text x="76" y="36" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="24" font-weight="700" fill="#ffffff">Fiverr Gig Scraper Pro</text>
-    <rect x="360" y="14" width="130" height="28" rx="14" fill="#10b981" opacity="0.15"/>
-    <text x="425" y="32" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="700" fill="#34d399" text-anchor="middle">MANIFEST V3</text>
-  </g>
+  <text x="180" y="132" font-family="'Gaegu', cursive, sans-serif" font-size="44" font-weight="700" fill="#2D2D2D">Fiverr Scraper Pro</text>
+  <rect x="520" y="102" width="140" height="34" rx="6" fill="#FFD23F" stroke="#2D2D2D" stroke-width="2"/>
+  <text x="590" y="125" font-family="'Space Mono', monospace" font-size="14" font-weight="700" fill="#2D2D2D" text-anchor="middle">MANIFEST V3</text>
 
   <!-- Big Title -->
-  <text x="100" y="240" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="52" font-weight="800" fill="#f8fafc">
-    Scrape, Analyze & Export
+  <text x="100" y="230" font-family="'Gaegu', cursive, sans-serif" font-size="64" font-weight="700" fill="#2D2D2D">
+    Scrape, Analyze &amp; Export
   </text>
-  <text x="100" y="300" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="52" font-weight="800" fill="url(#primary)">
+  <text x="100" y="300" font-family="'Gaegu', cursive, sans-serif" font-size="64" font-weight="700" fill="#00D37F">
     Fiverr Gig Listings in Real-Time
   </text>
 
   <!-- Subtitle -->
-  <text x="100" y="360" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="20" font-weight="400" fill="#94a3b8">
-    MutationObserver Lazy-Loader • 12+ Fields • Live Progress Bar • Auto CSV/Excel/JSON • Supabase Ready
+  <text x="100" y="365" font-family="'Inter', sans-serif" font-size="22" font-weight="600" fill="#2D2D2D">
+    MutationObserver Lazy-Loader • 12+ Fields Extracted • Auto CSV/Excel/JSON • Supabase Ready
   </text>
 
   <!-- Metric Badges -->
   <g transform="translate(100, 420)">
-    <!-- Metric 1 -->
-    <rect width="210" height="90" rx="18" fill="#1e293b" stroke="#334155" stroke-width="1"/>
-    <text x="24" y="36" font-family="sans-serif" font-size="12" font-weight="600" fill="#94a3b8">AVERAGE GIG PRICE</text>
-    <text x="24" y="68" font-family="sans-serif" font-size="28" font-weight="800" fill="#34d399">$${avgPrice}</text>
+    <rect width="220" height="110" rx="16" fill="#FFFEF2" stroke="#2D2D2D" stroke-width="3"/>
+    <text x="24" y="42" font-family="'Space Mono', monospace" font-size="12" font-weight="700" fill="#2D2D2D">AVG PRICE</text>
+    <text x="24" y="85" font-family="'Gaegu', cursive" font-size="42" font-weight="900" fill="#00D37F">$${avgPrice}</text>
 
-    <!-- Metric 2 -->
-    <g transform="translate(230, 0)">
-      <rect width="210" height="90" rx="18" fill="#1e293b" stroke="#334155" stroke-width="1"/>
-      <text x="24" y="36" font-family="sans-serif" font-size="12" font-weight="600" fill="#94a3b8">SATISFACTION</text>
-      <text x="24" y="68" font-family="sans-serif" font-size="28" font-weight="800" fill="#fbbf24">★ 4.9 / 5.0</text>
+    <g transform="translate(245, 0)">
+      <rect width="220" height="110" rx="16" fill="#FFFEF2" stroke="#2D2D2D" stroke-width="3"/>
+      <text x="24" y="42" font-family="'Space Mono', monospace" font-size="12" font-weight="700" fill="#2D2D2D">RATING</text>
+      <text x="24" y="85" font-family="'Gaegu', cursive" font-size="42" font-weight="900" fill="#FFD23F">★ 4.9 / 5.0</text>
     </g>
 
-    <!-- Metric 3 -->
-    <g transform="translate(460, 0)">
-      <rect width="210" height="90" rx="18" fill="#1e293b" stroke="#334155" stroke-width="1"/>
-      <text x="24" y="36" font-family="sans-serif" font-size="12" font-weight="600" fill="#94a3b8">DATA EXTRACTION</text>
-      <text x="24" y="68" font-family="sans-serif" font-size="28" font-weight="800" fill="#f8fafc">12 Columns</text>
+    <g transform="translate(490, 0)">
+      <rect width="220" height="110" rx="16" fill="#FFFEF2" stroke="#2D2D2D" stroke-width="3"/>
+      <text x="24" y="42" font-family="'Space Mono', monospace" font-size="12" font-weight="700" fill="#2D2D2D">DATA EXTRACTION</text>
+      <text x="24" y="85" font-family="'Gaegu', cursive" font-size="42" font-weight="900" fill="#2D2D2D">12 Fields</text>
     </g>
 
-    <!-- Metric 4 -->
-    <g transform="translate(690, 0)">
-      <rect width="240" height="90" rx="18" fill="#1e293b" stroke="#334155" stroke-width="1"/>
-      <text x="24" y="36" font-family="sans-serif" font-size="12" font-weight="600" fill="#94a3b8">EXPORTS &amp; SYNC</text>
-      <text x="24" y="68" font-family="sans-serif" font-size="24" font-weight="800" fill="#38bdf8">CSV • Excel • Supabase</text>
+    <g transform="translate(735, 0)">
+      <rect width="240" height="110" rx="16" fill="#FFD23F" stroke="#2D2D2D" stroke-width="3"/>
+      <text x="24" y="42" font-family="'Space Mono', monospace" font-size="12" font-weight="700" fill="#2D2D2D">CLOUD DATABASE</text>
+      <text x="24" y="85" font-family="'Gaegu', cursive" font-size="34" font-weight="900" fill="#2D2D2D">Supabase &amp; Vercel</text>
     </g>
   </g>
-
-  <!-- Footer -->
-  <text x="100" y="575" font-family="sans-serif" font-size="14" font-weight="600" fill="#64748b">
-    Open Source Community Edition • 100% Client-Side • MIT Licensed
-  </text>
 </svg>`;
 
     const blob = new Blob([svgContent], { type: 'image/svg+xml' });
@@ -160,27 +128,27 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ gigs }) => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 pb-28">
       {/* Top Navigation Strip */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-2 flex flex-wrap gap-1.5 shadow-lg">
+      <div className="bg-white border-2 border-[#2D2D2D] rounded-2xl p-2 flex flex-wrap gap-2 shadow-[4px_4px_0_#2D2D2D]">
         <button
           onClick={() => setActiveTab('metadata')}
-          className={`flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all ${
+          className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold font-sans uppercase tracking-wider transition-all cursor-pointer ${
             activeTab === 'metadata'
-              ? 'bg-emerald-600 text-white shadow-md'
-              : 'text-slate-400 hover:text-white hover:bg-slate-800'
+              ? 'bg-[#FFD23F] text-[#2D2D2D] border-2 border-[#2D2D2D] shadow-[3px_3px_0_#2D2D2D] -translate-y-0.5'
+              : 'text-[#2D2D2D] hover:bg-[#FFFEF2]'
           }`}
         >
           <Github className="w-3.5 h-3.5" />
-          <span>GitHub Repo Standard</span>
+          <span>GitHub Standard</span>
         </button>
 
         <button
           onClick={() => setActiveTab('nocoder')}
-          className={`flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all ${
+          className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold font-sans uppercase tracking-wider transition-all cursor-pointer ${
             activeTab === 'nocoder'
-              ? 'bg-emerald-600 text-white shadow-md'
-              : 'text-slate-400 hover:text-white hover:bg-slate-800'
+              ? 'bg-[#00D37F] text-[#2D2D2D] border-2 border-[#2D2D2D] shadow-[3px_3px_0_#2D2D2D] -translate-y-0.5'
+              : 'text-[#2D2D2D] hover:bg-[#FFFEF2]'
           }`}
         >
           <BookOpen className="w-3.5 h-3.5" />
@@ -189,10 +157,10 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ gigs }) => {
 
         <button
           onClick={() => setActiveTab('social')}
-          className={`flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all ${
+          className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold font-sans uppercase tracking-wider transition-all cursor-pointer ${
             activeTab === 'social'
-              ? 'bg-emerald-600 text-white shadow-md'
-              : 'text-slate-400 hover:text-white hover:bg-slate-800'
+              ? 'bg-[#FFD23F] text-[#2D2D2D] border-2 border-[#2D2D2D] shadow-[3px_3px_0_#2D2D2D] -translate-y-0.5'
+              : 'text-[#2D2D2D] hover:bg-[#FFFEF2]'
           }`}
         >
           <Share2 className="w-3.5 h-3.5" />
@@ -201,14 +169,14 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ gigs }) => {
 
         <button
           onClick={() => setActiveTab('suggestions')}
-          className={`flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all ${
+          className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold font-sans uppercase tracking-wider transition-all cursor-pointer ${
             activeTab === 'suggestions'
-              ? 'bg-emerald-600 text-white shadow-md'
-              : 'text-slate-400 hover:text-white hover:bg-slate-800'
+              ? 'bg-[#FFD23F] text-[#2D2D2D] border-2 border-[#2D2D2D] shadow-[3px_3px_0_#2D2D2D] -translate-y-0.5'
+              : 'text-[#2D2D2D] hover:bg-[#FFFEF2]'
           }`}
         >
-          <Lightbulb className="w-3.5 h-3.5 text-amber-400" />
-          <span>Design Improvements & Suggestions</span>
+          <Lightbulb className="w-3.5 h-3.5 text-[#2D2D2D]" />
+          <span>Design Roadmap</span>
         </button>
       </div>
 
@@ -216,9 +184,9 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ gigs }) => {
       {activeTab === 'metadata' && (
         <div className="space-y-6">
           {/* Repo Name Suggestions */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
-            <h3 className="text-sm font-bold text-white flex items-center space-x-2">
-              <Github className="w-4 h-4 text-emerald-400" />
+          <div className="bg-white border-2 border-[#2D2D2D] rounded-2xl p-5 shadow-[5px_5px_0_rgba(45,45,45,0.1)] space-y-4">
+            <h3 className="font-hand text-2xl font-bold text-[#2D2D2D] flex items-center gap-2">
+              <Github className="w-5 h-5 text-[#2D2D2D]" />
               <span>Recommended GitHub Repository Names</span>
             </h3>
 
@@ -226,22 +194,22 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ gigs }) => {
               {REPO_SUGGESTIONS.map((repo, idx) => (
                 <div
                   key={repo.name}
-                  className="bg-slate-950 p-3.5 rounded-xl border border-slate-800 flex items-center justify-between"
+                  className="bg-[#FFFEF2] p-3.5 rounded-xl border-2 border-[#2D2D2D] shadow-[2px_2px_0_#2D2D2D] flex items-center justify-between"
                 >
                   <div>
-                    <span className="text-[10px] uppercase font-bold text-emerald-400 block mb-0.5">
+                    <span className="font-code text-[10px] uppercase font-bold text-[#00D37F] block mb-0.5">
                       {repo.tag}
                     </span>
-                    <code className="text-xs font-bold text-white font-mono">{repo.name}</code>
+                    <code className="font-code text-xs font-bold text-[#2D2D2D]">{repo.name}</code>
                   </div>
 
                   <button
                     onClick={() => copyToClipboard(repo.name, `name-${idx}`)}
-                    className="p-1.5 text-slate-400 hover:text-white rounded hover:bg-slate-800 transition-colors"
-                    title="Copy repo name"
+                    className="p-1.5 text-[#2D2D2D] hover:bg-[#FFD23F] border border-[#2D2D2D] rounded transition-colors shadow-[1px_1px_0_#2D2D2D]"
+                    title="Copy name"
                   >
                     {copiedField === `name-${idx}` ? (
-                      <Check className="w-3.5 h-3.5 text-emerald-400" />
+                      <Check className="w-3.5 h-3.5 text-[#00D37F]" />
                     ) : (
                       <Copy className="w-3.5 h-3.5" />
                     )}
@@ -253,99 +221,59 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ gigs }) => {
 
           {/* Description & Topics */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {/* Description */}
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-3">
+            <div className="bg-white border-2 border-[#2D2D2D] rounded-2xl p-5 shadow-[5px_5px_0_rgba(45,45,45,0.1)] space-y-3">
               <div className="flex items-center justify-between">
-                <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider">
-                  GitHub About / Description
-                </h4>
+                <span className="label-mono text-[#2D2D2D]">GitHub About / Description</span>
                 <button
                   onClick={() => copyToClipboard(REPO_DESCRIPTION, 'desc')}
-                  className="flex items-center space-x-1 text-xs text-emerald-400 hover:underline"
+                  className="font-code text-xs text-[#00D37F] hover:underline font-bold"
                 >
-                  {copiedField === 'desc' ? (
-                    <>
-                      <Check className="w-3 h-3" />
-                      <span>Copied</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-3 h-3" />
-                      <span>Copy Description</span>
-                    </>
-                  )}
+                  {copiedField === 'desc' ? 'Copied!' : 'Copy Text'}
                 </button>
               </div>
 
-              <div className="p-3.5 bg-slate-950 rounded-xl border border-slate-800 text-xs text-slate-300 leading-relaxed font-sans">
+              <div className="p-3.5 bg-[#FFFEF2] rounded-xl border-2 border-[#2D2D2D] text-xs text-[#2D2D2D] leading-relaxed font-sans shadow-[2px_2px_0_#2D2D2D]">
                 {REPO_DESCRIPTION}
               </div>
-              <span className="text-[11px] text-slate-500">Length: {REPO_DESCRIPTION.length} characters (GitHub optimal limit is 350)</span>
             </div>
 
-            {/* Topics */}
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-3">
+            <div className="bg-white border-2 border-[#2D2D2D] rounded-2xl p-5 shadow-[5px_5px_0_rgba(45,45,45,0.1)] space-y-3">
               <div className="flex items-center justify-between">
-                <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider">
-                  GitHub Topics / Tags
-                </h4>
+                <span className="label-mono text-[#2D2D2D]">GitHub Topics / Tags</span>
                 <button
                   onClick={() => copyToClipboard(REPO_TOPICS.join(', '), 'topics')}
-                  className="flex items-center space-x-1 text-xs text-emerald-400 hover:underline"
+                  className="font-code text-xs text-[#00D37F] hover:underline font-bold"
                 >
-                  {copiedField === 'topics' ? (
-                    <>
-                      <Check className="w-3 h-3" />
-                      <span>Copied All</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-3 h-3" />
-                      <span>Copy Topics</span>
-                    </>
-                  )}
+                  {copiedField === 'topics' ? 'Copied!' : 'Copy All'}
                 </button>
               </div>
 
-              <div className="flex flex-wrap gap-1.5 p-3.5 bg-slate-950 rounded-xl border border-slate-800">
+              <div className="flex flex-wrap gap-1.5 p-3.5 bg-[#FFFEF2] rounded-xl border-2 border-[#2D2D2D] shadow-[2px_2px_0_#2D2D2D]">
                 {REPO_TOPICS.map((topic) => (
                   <span
                     key={topic}
-                    className="text-xs px-2.5 py-1 rounded-lg bg-emerald-950/60 text-emerald-300 border border-emerald-800/80 font-mono"
+                    className="text-xs px-2.5 py-1 rounded-lg bg-white text-[#2D2D2D] border border-[#2D2D2D] font-code font-bold"
                   >
-                    {topic}
+                    #{topic}
                   </span>
                 ))}
               </div>
-              <span className="text-[11px] text-slate-500">Paste these in your GitHub repository's "About &gt; Topics" section.</span>
             </div>
           </div>
 
           {/* Badges Markdown */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-3">
+          <div className="bg-white border-2 border-[#2D2D2D] rounded-2xl p-5 shadow-[5px_5px_0_rgba(45,45,45,0.1)] space-y-3">
             <div className="flex items-center justify-between">
-              <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider">
-                README.md Badges (Shields.io)
-              </h4>
+              <span className="label-mono text-[#2D2D2D]">README Badges (Shields.io)</span>
               <button
                 onClick={() => copyToClipboard(BADGES_MARKDOWN, 'badges')}
-                className="flex items-center space-x-1 text-xs text-emerald-400 hover:underline"
+                className="font-code text-xs text-[#00D37F] hover:underline font-bold"
               >
-                {copiedField === 'badges' ? (
-                  <>
-                    <Check className="w-3 h-3" />
-                    <span>Copied Badges</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-3 h-3" />
-                    <span>Copy Markdown</span>
-                  </>
-                )}
+                {copiedField === 'badges' ? 'Copied Badges!' : 'Copy Markdown'}
               </button>
             </div>
 
-            <div className="p-3 bg-slate-950 font-mono text-xs rounded-xl border border-slate-800 text-slate-300 overflow-x-auto">
+            <div className="p-3 bg-[#FFFEF2] font-code text-xs rounded-xl border-2 border-[#2D2D2D] text-[#2D2D2D] overflow-x-auto shadow-[2px_2px_0_#2D2D2D]">
               <pre>{BADGES_MARKDOWN}</pre>
             </div>
           </div>
@@ -355,66 +283,61 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ gigs }) => {
       {/* TAB 2: NON-CODER 3-CLICK GUIDE */}
       {activeTab === 'nocoder' && (
         <div className="space-y-5">
-          <div className="bg-gradient-to-r from-emerald-950/50 via-slate-900 to-slate-900 border border-emerald-500/30 rounded-2xl p-5">
-            <div className="flex items-center space-x-2 text-emerald-400 font-bold text-sm mb-1">
-              <Sparkles className="w-4 h-4" />
-              <span>Complete Non-Coder Guide: From Zero to Scraping in 2 Minutes</span>
-            </div>
-            <p className="text-xs text-slate-300">
-              No programming knowledge, terminal commands, or API keys needed. Follow these 5 clear steps.
+          <div className="bg-[#FFD23F] border-2 border-[#2D2D2D] rounded-2xl p-5 shadow-[4px_4px_0_#2D2D2D]">
+            <h3 className="font-hand text-3xl font-bold text-[#2D2D2D] mb-1">
+              Complete Non-Coder Guide: From Zero to Scraping in 2 Minutes
+            </h3>
+            <p className="text-xs text-[#2D2D2D] font-sans">
+              No programming knowledge, terminal commands, or API keys needed.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Step 1 */}
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-2">
-              <div className="flex items-center space-x-2 text-white font-bold text-xs">
-                <span className="w-6 h-6 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center font-black text-xs">
+            <div className="bg-white border-2 border-[#2D2D2D] rounded-2xl p-5 shadow-[4px_4px_0_#2D2D2D] space-y-2">
+              <div className="flex items-center gap-2 text-[#2D2D2D] font-bold text-xs">
+                <span className="w-6 h-6 rounded-full bg-[#00D37F] border border-[#2D2D2D] text-[#2D2D2D] flex items-center justify-center font-hand text-base">
                   1
                 </span>
-                <span>Download &amp; Extract the Extension</span>
+                <span className="font-sans text-sm font-bold">Download &amp; Extract the Extension</span>
               </div>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Click the bright green button <strong>"Download Chrome Extension (.zip)"</strong> in the top header. Once downloaded, double-click to unzip the folder to your desktop.
+              <p className="text-xs text-[#2D2D2D]/80 leading-relaxed font-sans">
+                Click the yellow <strong>"Download Extension (.zip)"</strong> button in the header. Once downloaded, double-click to unzip the folder to your desktop.
               </p>
             </div>
 
-            {/* Step 2 */}
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-2">
-              <div className="flex items-center space-x-2 text-white font-bold text-xs">
-                <span className="w-6 h-6 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center font-black text-xs">
+            <div className="bg-white border-2 border-[#2D2D2D] rounded-2xl p-5 shadow-[4px_4px_0_#2D2D2D] space-y-2">
+              <div className="flex items-center gap-2 text-[#2D2D2D] font-bold text-xs">
+                <span className="w-6 h-6 rounded-full bg-[#FFD23F] border border-[#2D2D2D] text-[#2D2D2D] flex items-center justify-center font-hand text-base">
                   2
                 </span>
-                <span>Load in Google Chrome / Brave / Edge</span>
+                <span className="font-sans text-sm font-bold">Load in Google Chrome / Brave</span>
               </div>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Open Chrome, type <code className="text-emerald-400">chrome://extensions</code> in the URL bar, turn on the <strong>Developer mode</strong> toggle in top-right, and click <strong>"Load unpacked"</strong>. Select the unzipped folder!
+              <p className="text-xs text-[#2D2D2D]/80 leading-relaxed font-sans">
+                Open Chrome, navigate to <code className="bg-[#FFFEF2] px-1 py-0.5 rounded border border-[#2D2D2D] font-code">chrome://extensions</code>, enable <strong>Developer mode</strong> in the top right, and click <strong>"Load unpacked"</strong>. Select the unzipped folder!
               </p>
             </div>
 
-            {/* Step 3 */}
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-2">
-              <div className="flex items-center space-x-2 text-white font-bold text-xs">
-                <span className="w-6 h-6 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center font-black text-xs">
+            <div className="bg-white border-2 border-[#2D2D2D] rounded-2xl p-5 shadow-[4px_4px_0_#2D2D2D] space-y-2">
+              <div className="flex items-center gap-2 text-[#2D2D2D] font-bold text-xs">
+                <span className="w-6 h-6 rounded-full bg-[#00D37F] border border-[#2D2D2D] text-[#2D2D2D] flex items-center justify-center font-hand text-base">
                   3
                 </span>
-                <span>Open Fiverr &amp; Search Anything</span>
+                <span className="font-sans text-sm font-bold">Search Fiverr &amp; Launch</span>
               </div>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Go to <a href="https://www.fiverr.com" target="_blank" rel="noreferrer" className="text-emerald-400 underline">Fiverr.com</a> and search for any service (e.g. <em>"logo design"</em>, <em>"python script"</em>, <em>"wordpress"</em>). Click the extension icon in your toolbar, choose your filters, and click <strong>Start Scraping</strong>.
+              <p className="text-xs text-[#2D2D2D]/80 leading-relaxed font-sans">
+                Navigate to any Fiverr search page, click the extension icon in your Chrome toolbar, set your filters, and click <strong>Start Scraping</strong>.
               </p>
             </div>
 
-            {/* Step 4 */}
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-2">
-              <div className="flex items-center space-x-2 text-white font-bold text-xs">
-                <span className="w-6 h-6 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center font-black text-xs">
+            <div className="bg-white border-2 border-[#2D2D2D] rounded-2xl p-5 shadow-[4px_4px_0_#2D2D2D] space-y-2">
+              <div className="flex items-center gap-2 text-[#2D2D2D] font-bold text-xs">
+                <span className="w-6 h-6 rounded-full bg-[#FFD23F] border border-[#2D2D2D] text-[#2D2D2D] flex items-center justify-center font-hand text-base">
                   4
                 </span>
-                <span>Automatic Download in Excel or CSV</span>
+                <span className="font-sans text-sm font-bold">Auto-Download CSV / Excel</span>
               </div>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Sit back! The scraper automatically scrolls and uses a MutationObserver to grab lazy-loaded cards. When finished, your file automatically downloads to your Downloads folder!
+              <p className="text-xs text-[#2D2D2D]/80 leading-relaxed font-sans">
+                The on-screen HUD displays a live progress bar as it captures lazy-loaded cards with MutationObserver, and automatically downloads the dataset once complete.
               </p>
             </div>
           </div>
@@ -426,158 +349,109 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ gigs }) => {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-sm font-bold text-white">GitHub Social OpenGraph Preview Card (1200 x 630)</h3>
-              <p className="text-xs text-slate-400">
-                Matches the recommended standard dimensions for GitHub, Twitter Cards, and LinkedIn.
+              <h3 className="font-hand text-3xl font-bold text-[#2D2D2D]">GitHub Social OpenGraph Preview</h3>
+              <p className="label-mono text-xs text-[#2D2D2D]/70">
+                1200 x 630 px standard dimension banner
               </p>
             </div>
 
             <button
               onClick={downloadSocialBannerSvg}
-              className="flex items-center space-x-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs shadow transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-[#FFD23F] hover:bg-[#ffe066] text-[#2D2D2D] font-extrabold uppercase font-sans text-xs border-2 border-[#2D2D2D] shadow-[3px_3px_0_#2D2D2D] rounded-xl cursor-pointer"
             >
-              <Download className="w-4 h-4" />
+              <Download className="w-4 h-4 stroke-[2.5]" />
               <span>Export Social Banner (.svg)</span>
             </button>
           </div>
 
-          {/* Interactive Preview Canvas Box */}
-          <div className="relative aspect-[1200/630] w-full rounded-2xl overflow-hidden border border-slate-700 bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950/70 p-6 sm:p-10 flex flex-col justify-between shadow-2xl">
-            {/* Top Bar */}
+          <div className="relative aspect-[1200/630] w-full rounded-2xl overflow-hidden border-3 border-[#2D2D2D] bg-[#FFFEF2] p-8 flex flex-col justify-between shadow-[8px_8px_0_#2D2D2D]">
             <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center font-black text-slate-950 text-xl shadow-lg">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-xl bg-[#00D37F] border-2 border-[#2D2D2D] shadow-[3px_3px_0_#2D2D2D] flex items-center justify-center font-hand text-3xl font-black text-[#2D2D2D] -rotate-3">
                   fi
                 </div>
                 <div>
-                  <h4 className="text-base sm:text-lg font-extrabold text-white">Fiverr Gig Scraper Pro</h4>
-                  <span className="text-[11px] font-mono text-emerald-400 font-semibold">Manifest V3 • Auto Exporter</span>
+                  <h4 className="font-hand text-2xl font-bold text-[#2D2D2D]">Fiverr Scraper Pro</h4>
+                  <span className="font-code text-xs text-[#00D37F] font-bold">Manifest V3 • Auto Exporter</span>
                 </div>
               </div>
 
-              <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+              <span className="px-3 py-1 rounded-md font-code text-xs font-bold bg-[#FFD23F] border border-[#2D2D2D] shadow-[2px_2px_0_#2D2D2D]">
                 100% Client-Side
               </span>
             </div>
 
-            {/* Middle Main */}
             <div className="my-auto py-4 space-y-2">
-              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
+              <h2 className="font-hand text-4xl sm:text-5.5xl font-bold text-[#2D2D2D] leading-none">
                 Scrape, Analyze &amp; Export <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">
-                  Fiverr Gigs in Real-Time
-                </span>
+                <span className="text-[#00D37F]">Fiverr Gigs in Real-Time</span>
               </h2>
-              <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
-                MutationObserver Lazy-Loader • 12+ Fields Extracted • Rating &amp; Price Filters • Auto CSV, Excel, JSON Export • Supabase Ready
+              <p className="font-sans text-sm text-[#2D2D2D]/80 font-medium">
+                MutationObserver Lazy-Loader • 12+ Fields Extracted • Auto CSV, Excel, JSON • Supabase Ready
               </p>
             </div>
 
-            {/* Bottom 4 Badges */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 text-xs">
-              <div className="bg-slate-900/90 border border-slate-700/80 p-2.5 rounded-xl">
-                <div className="text-[10px] uppercase text-slate-400 font-semibold">Average Price</div>
-                <div className="text-base sm:text-lg font-bold text-emerald-400">
-                  ${gigs.length > 0 ? (gigs.reduce((a, b) => a + b.price, 0) / gigs.length).toFixed(1) : '124.50'}
-                </div>
+            <div className="grid grid-cols-4 gap-3">
+              <div className="bg-white border-2 border-[#2D2D2D] p-3 rounded-xl shadow-[2px_2px_0_#2D2D2D]">
+                <div className="label-mono text-[9px]">AVG PRICE</div>
+                <div className="font-hand text-2xl font-bold text-[#00D37F]">$124.50</div>
               </div>
-
-              <div className="bg-slate-900/90 border border-slate-700/80 p-2.5 rounded-xl">
-                <div className="text-[10px] uppercase text-slate-400 font-semibold">Quality Index</div>
-                <div className="text-base sm:text-lg font-bold text-amber-400">★ 4.9 / 5.0</div>
+              <div className="bg-white border-2 border-[#2D2D2D] p-3 rounded-xl shadow-[2px_2px_0_#2D2D2D]">
+                <div className="label-mono text-[9px]">RATING</div>
+                <div className="font-hand text-2xl font-bold text-[#FFD23F]">★ 4.9 / 5.0</div>
               </div>
-
-              <div className="bg-slate-900/90 border border-slate-700/80 p-2.5 rounded-xl">
-                <div className="text-[10px] uppercase text-slate-400 font-semibold">Fields Captured</div>
-                <div className="text-base sm:text-lg font-bold text-white">12 Core Fields</div>
+              <div className="bg-white border-2 border-[#2D2D2D] p-3 rounded-xl shadow-[2px_2px_0_#2D2D2D]">
+                <div className="label-mono text-[9px]">DATA EXTRACTION</div>
+                <div className="font-hand text-2xl font-bold text-[#2D2D2D]">12 Fields</div>
               </div>
-
-              <div className="bg-slate-900/90 border border-slate-700/80 p-2.5 rounded-xl">
-                <div className="text-[10px] uppercase text-slate-400 font-semibold">Cloud Sync</div>
-                <div className="text-base sm:text-lg font-bold text-sky-400">Supabase &amp; Vercel</div>
+              <div className="bg-[#FFD23F] border-2 border-[#2D2D2D] p-3 rounded-xl shadow-[2px_2px_0_#2D2D2D]">
+                <div className="label-mono text-[9px]">DATABASE SYNC</div>
+                <div className="font-hand text-xl font-bold text-[#2D2D2D]">Supabase Ready</div>
               </div>
             </div>
           </div>
         </div>
       )}
 
-      {/* TAB 4: DESIGN IMPROVEMENTS & ROADMAP SUGGESTIONS */}
+      {/* TAB 4: DESIGN IMPROVEMENTS & ROADMAP */}
       {activeTab === 'suggestions' && (
         <div className="space-y-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-1">
-            <h3 className="text-sm font-bold text-white flex items-center space-x-2">
-              <Lightbulb className="w-4 h-4 text-amber-400" />
-              <span>Future Design Enhancements &amp; High-Value Feature Suggestions</span>
+          <div className="bg-white border-2 border-[#2D2D2D] rounded-2xl p-5 shadow-[4px_4px_0_#2D2D2D]">
+            <h3 className="font-hand text-3xl font-bold text-[#2D2D2D] flex items-center gap-2">
+              <Lightbulb className="w-5 h-5 text-[#FFD23F]" />
+              <span>Future Design Enhancements &amp; Roadmap</span>
             </h3>
-            <p className="text-xs text-slate-400">
-              Here are 6 strategic innovations you can add to scale this project into a commercial SaaS product or leading open-source tool:
+            <p className="label-mono text-xs text-[#2D2D2D]/70 mt-1">
+              Key strategic ideas to scale this project into a commercial SaaS:
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Innovation 1 */}
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-2">
-              <div className="flex items-center space-x-2 text-emerald-400 font-bold text-xs">
-                <Cpu className="w-4 h-4" />
-                <span>1. AI Gig Title &amp; Keyword Generator (Gemini Powered)</span>
-              </div>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Feed the top 10% highest-rated gigs from any niche into Gemini to generate high-ranking gig titles, optimized SEO tags, and competitive pricing recommendations.
+            <div className="bg-white border-2 border-[#2D2D2D] rounded-2xl p-4 shadow-[4px_4px_0_rgba(45,45,45,0.1)] space-y-1">
+              <span className="font-code text-xs font-bold text-[#00D37F]">1. AI TITLE &amp; TAG OPTIMIZER</span>
+              <p className="text-xs text-[#2D2D2D] leading-relaxed">
+                Feed the top 10% highest-rated gigs into Gemini to generate high-ranking gig titles, optimized SEO tags, and competitive pricing.
               </p>
             </div>
 
-            {/* Innovation 2 */}
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-2">
-              <div className="flex items-center space-x-2 text-indigo-400 font-bold text-xs">
-                <TrendingUp className="w-4 h-4" />
-                <span>2. Competitor Price Elasticity &amp; Niche Saturation Score</span>
-              </div>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Add an automated niche saturation score (0 to 100) comparing review velocity vs. average gig price to reveal under-served, high-margin freelance niches.
+            <div className="bg-white border-2 border-[#2D2D2D] rounded-2xl p-4 shadow-[4px_4px_0_rgba(45,45,45,0.1)] space-y-1">
+              <span className="font-code text-xs font-bold text-[#FFD23F]">2. NICHE SATURATION INDEX</span>
+              <p className="text-xs text-[#2D2D2D] leading-relaxed">
+                Add an automated saturation score comparing review velocity vs. average gig price to reveal underserved freelance niches.
               </p>
             </div>
 
-            {/* Innovation 3 */}
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-2">
-              <div className="flex items-center space-x-2 text-teal-400 font-bold text-xs">
-                <Rocket className="w-4 h-4" />
-                <span>3. Multi-Page Continuous Crawler</span>
-              </div>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Automatically navigate across pages 1 through 10 on Fiverr with simulated human delays and random mouse pauses to extract 500+ gigs seamlessly.
+            <div className="bg-white border-2 border-[#2D2D2D] rounded-2xl p-4 shadow-[4px_4px_0_rgba(45,45,45,0.1)] space-y-1">
+              <span className="font-code text-xs font-bold text-[#00D37F]">3. MULTI-PAGE CONTINUOUS CRAWLER</span>
+              <p className="text-xs text-[#2D2D2D] leading-relaxed">
+                Automatically navigate across pages 1 through 10 on Fiverr with simulated human delays to extract 500+ gigs seamlessly.
               </p>
             </div>
 
-            {/* Innovation 4 */}
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-2">
-              <div className="flex items-center space-x-2 text-amber-400 font-bold text-xs">
-                <Zap className="w-4 h-4" />
-                <span>4. Discord &amp; Telegram Webhook Alerts</span>
-              </div>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Notify buyers or agencies via webhook whenever a new gig with &lt; 24hr delivery or special discount pricing appears in a target category.
-              </p>
-            </div>
-
-            {/* Innovation 5 */}
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-2">
-              <div className="flex items-center space-x-2 text-purple-400 font-bold text-xs">
-                <Database className="w-4 h-4" />
-                <span>5. Historical Price &amp; Review Velocity Tracking</span>
-              </div>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Store consecutive daily runs in Supabase to plot line charts showing which seller rankings are accelerating over time.
-              </p>
-            </div>
-
-            {/* Innovation 6 */}
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-2">
-              <div className="flex items-center space-x-2 text-pink-400 font-bold text-xs">
-                <ShieldCheck className="w-4 h-4" />
-                <span>6. Human-Stealth Scroll Jitter &amp; Safe Mode</span>
-              </div>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Randomized micro-pauses (600ms – 1800ms) with non-linear scroll cubic bezier easing to avoid anti-bot captchas during heavy scraping sessions.
+            <div className="bg-white border-2 border-[#2D2D2D] rounded-2xl p-4 shadow-[4px_4px_0_rgba(45,45,45,0.1)] space-y-1">
+              <span className="font-code text-xs font-bold text-[#FFD23F]">4. WEBHOOK ALERTS (DISCORD / TELEGRAM)</span>
+              <p className="text-xs text-[#2D2D2D] leading-relaxed">
+                Notify buyers or agencies via webhook whenever a new gig with 24h delivery or special discount pricing appears.
               </p>
             </div>
           </div>
