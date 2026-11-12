@@ -1,0 +1,6 @@
+{
+  "name": "Fiverr Gig Scraper - Chrome Extension & Studio",
+  "description": "Chrome Extension (Manifest V3) & Studio to scrape Fiverr gig listings with MutationObserver lazy-loading, CSV/Excel/JSON exports, Supabase sync, and Vercel readiness.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
